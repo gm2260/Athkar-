@@ -1,475 +1,186 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<title>زاد المسلم</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-<style>
-:root{--bg:#06281e;--c:#0d3d2e;--c2:#124e3b;--g:#dfb743;--t:#f2f7f4;--m:#a3c2b6;--b:rgba(223,183,67,0.25)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Tajawal',sans-serif;background:#031711;color:var(--t);display:flex;justify-content:center;min-height:100vh}
-#app{width:100%;max-width:480px;min-height:100vh;background:var(--bg);display:flex;flex-direction:column;padding-bottom:75px}
-.hdr{background:#031711;padding:12px 16px;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;font-size:16px;color:var(--g)}
-.sec{display:none;padding:12px}.sec.active{display:block}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:8px}
-.chip{padding:6px 12px;background:var(--c);border:1px solid var(--b);border-radius:99px;font-size:12px;font-weight:700;color:var(--m);cursor:pointer;white-space:nowrap}
-.chip.active{background:var(--g);color:#031711}
-.card{background:var(--c);border-radius:10px;border:1px solid var(--b);padding:12px;margin-bottom:10px}
-.card.done{border-color:#22c55e;background:#093326}
-.c-top{display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;font-weight:800;color:var(--g)}
-.c-txt{font-family:'Amiri',serif;font-size:17px;line-height:1.9;color:#fff;margin-bottom:6px;text-align:justify}
-.c-meta{background:rgba(223,183,67,0.1);border-right:3px solid var(--g);padding:4px 8px;border-radius:4px;font-size:11px;color:var(--m);margin-bottom:6px}
-.cnt-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;background:var(--g);color:#031711;border:none;border-radius:6px;padding:8px;font-size:13px;font-weight:900;cursor:pointer}
-.cnt-btn.done{background:#22c55e;color:#fff}
-.badge{background:rgba(0,0,0,0.25);padding:1px 6px;border-radius:99px;font-size:11px}
-.hero{background:linear-gradient(135deg,#0d3d2e,#175945);border-radius:10px;border:1px solid var(--g);padding:12px;margin-bottom:10px}
-.p-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
-.p-card{background:var(--c);border:1px solid var(--b);border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between}
-.p-card.cur{border-color:var(--g);background:var(--c2)}
-.btn-m{width:100%;background:var(--g);color:#031711;border:none;border-radius:6px;padding:9px;font-size:13px;font-weight:900;cursor:pointer;margin-top:6px}
-.t-ring{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#124e3b 50%,#06281e 100%);border:4px solid var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin:10px auto}
-.s-item{background:var(--c);border:1px solid var(--b);border-radius:6px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:5px}
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(3,23,17,0.96);border-top:1px solid var(--b);display:flex;justify-content:space-around;padding:6px 2px;z-index:90}
-.nav-btn{display:flex;flex-direction:column;align-items:center;color:var(--m);font-size:11px;font-weight:700;cursor:pointer;flex:1}
-.nav-btn.active{color:var(--g);font-weight:900}
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:120;display:none;align-items:flex-end}
-.modal.active{display:flex}
-.sheet{background:#0a3327;width:100%;max-height:80vh;border-radius:14px 14px 0 0;border-top:1px solid var(--g);display:flex;flex-direction:column;overflow:hidden}
-.sheet-h{padding:10px 14px;background:#031711;display:flex;justify-content:space-between;color:var(--g);font-weight:800;font-size:13px}
-.sheet-b{padding:12px 14px;overflow-y:auto}
-.t-box{background:var(--c);border-radius:6px;border-right:3px solid var(--g);padding:8px;margin-bottom:8px;font-size:12px;line-height:1.6}
-#q-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:100;display:none;flex-direction:column}
-#q-modal.active{display:flex}
-.ayah-box{font-family:'Amiri',serif;font-size:18px;line-height:2.2;text-align:justify;padding:12px;overflow-y:auto;flex:1}
-.ayah-span{cursor:pointer;padding:1px 2px}
-.ayah-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1px solid var(--g);border-radius:50%;font-size:10px;color:var(--g);margin:0 2px;vertical-align:middle}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>زاد المسلم | الأذكار ومواقيت الصلاة والمصحف الشريف</title>
+  <meta name="theme-color" content="#041812">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <!-- Modular Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app">
-  <header class="hdr">
-    <div class="logo">☪ زاد المسلم</div>
-    <div style="font-size:11px;color:var(--m);">🟢 متصل بالسحابة</div>
-  </header>
-
-  <main id="tab-athkar" class="sec active">
-    <div class="chips">
-      <button class="chip active" onclick="setCat('morning',this)">☀️ الصباح</button>
-      <button class="chip" onclick="setCat('evening',this)">🌙 المساء</button>
-      <button class="chip" onclick="setCat('sleep',this)">🛏️ النوم</button>
-      <button class="chip" onclick="setCat('general',this)">📿 عامة</button>
-    </div>
-    <div id="athkar-box"></div>
-  </main>
-
-  <main id="tab-prayer" class="sec">
-    <div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;margin-bottom:8px;">
-      <span style="font-size:12px;color:var(--g);font-weight:700;">📍 <span id="loc-txt">القصيم / الرياض، السعودية</span></span>
-      <button onclick="getGPS()" style="background:var(--g);color:#031711;border:none;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;">موقعي 📡</button>
-    </div>
-    <div class="hero">
-      <div style="font-size:10px;color:var(--g);" id="hijri-txt">تقويم أم القرى</div>
-      <div style="font-size:18px;font-weight:900;" id="next-p-txt">الصلاة القادمة: الظهر</div>
-      <div style="font-size:11px;color:var(--m);" id="count-txt">جاري الحساب...</div>
-    </div>
-    <div class="p-grid">
-      <div class="p-card" id="card-Fajr"><span>الفجر</span><strong id="t-Fajr">04:18 ص</strong></div>
-      <div class="p-card" id="card-Sunrise"><span>الشروق</span><strong id="t-Sunrise">05:38 ص</strong></div>
-      <div class="p-card" id="card-Dhuhr"><span>الظهر</span><strong id="t-Dhuhr">11:58 ص</strong></div>
-      <div class="p-card" id="card-Asr"><span>العصر</span><strong id="t-Asr">03:25 م</strong></div>
-      <div class="p-card" id="card-Maghrib"><span>المغرب</span><strong id="t-Maghrib">06:19 م</strong></div>
-      <div class="p-card" id="card-Isha"><span>العشاء</span><strong id="t-Isha">07:49 م</strong></div>
-    </div>
-    <button class="btn-m" onclick="askNotif()" style="background:var(--c2);color:#fff;border:1px solid var(--b);">📲 تفعيل إشعارات الصلوات والأذكار</button>
-  </main>
-
-  <main id="tab-quran" class="sec">
-    <input type="text" placeholder="🔍 ابحث عن سورة بالاسم..." oninput="searchSurah(this.value)" style="width:100%;padding:8px 10px;background:var(--c);border:1px solid var(--b);border-radius:6px;margin-bottom:8px;color:#fff;outline:none;font-family:'Tajawal';font-size:12px;">
-    <div class="card" style="padding:8px 10px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <div>
-        <div style="font-size:10px;color:var(--g);font-weight:700;">📌 فاصلة القراءة</div>
-        <div style="font-size:12px;font-weight:800;" id="bm-txt">سورة الكهف - آية 1</div>
+  <div id="app">
+    <!-- Top Application Bar -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">☪</span>
+        <span>زاد المسلم</span>
       </div>
-      <button onclick="resumeBM()" style="background:var(--g);color:#031711;border:none;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:900;cursor:pointer;">متابعة</button>
-    </div>
-    <div id="surahs-box"></div>
-  </main>
-
-  <main id="tab-tasbeeh" class="sec">
-    <div style="text-align:center;">
-      <div class="t-ring" onclick="countT()">
-        <div style="font-size:38px;font-weight:900;color:var(--g);" id="t-val">0</div>
-        <div style="font-size:11px;color:var(--m);font-weight:700;" id="t-target">الهدف: 33</div>
+      <div class="cloud-badge">
+        <div class="cloud-dot"></div>
+        <span>سحابي متصل</span>
       </div>
-      <div style="font-size:15px;font-weight:800;color:var(--g);margin-bottom:8px;" id="t-lbl">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div>
-      <div class="chips" style="justify-content:center;">
-        <button class="chip active" onclick="setT('سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',33,this)">سبحان الله</button>
-        <button class="chip" onclick="setT('الْحَمْدُ لِلَّهِ',33,this)">الحمد لله</button>
-        <button class="chip" onclick="setT('لَا إِلَهَ إِلَّا اللَّهُ',100,this)">لا إله إلا الله</button>
-        <button class="chip" onclick="setT('أَسْتَغْفِرُ اللَّهَ',100,this)">أستغفر الله</button>
+    </header>
+
+    <!-- 1. TAB: ATHKAR (الأذكار) -->
+    <main id="tab-athkar" class="tab-content active">
+      <div class="category-scroller">
+        <button class="chip active" onclick="setCategory('morning', this)">☀️ أذكار الصباح</button>
+        <button class="chip" onclick="setCategory('evening', this)">🌙 أذكار المساء</button>
+        <button class="chip" onclick="setCategory('sleep', this)">🛏️ أذكار النوم</button>
+        <button class="chip" onclick="setCategory('general', this)">📿 أذكار عامة</button>
       </div>
-      <button class="btn-m" onclick="resetT()" style="background:var(--c2);color:#fff;border:1px solid var(--b);margin-top:8px;">🔄 تصفير العداد</button>
-    </div>
-  </main>
+      <div id="athkar-box"></div>
+    </main>
 
-  <main id="tab-settings" class="sec">
-    <div class="card">
-      <div style="font-weight:800;color:var(--g);margin-bottom:4px;">☁️ سحابة Firebase Realtime Database</div>
-      <div style="font-size:11px;color:var(--m);margin-bottom:6px;">المشروع: athkar-72a94</div>
-      <div style="font-size:11px;background:var(--c2);padding:6px;border-radius:4px;margin-bottom:6px;">
-        <div>إجمالي التسبيحات: <strong id="cloud-cnt" style="color:var(--g);">0</strong></div>
-        <div>معرف جهازك: <small id="dev-txt">dev_id</small></div>
+    <!-- 2. TAB: PRAYER (المواقيت) -->
+    <main id="tab-prayer" class="tab-content">
+      <div class="dhikr-card" style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; margin-bottom:12px;">
+        <span style="font-size:12px; color:var(--gold-primary); font-weight:800;">📍 <span id="loc-txt">القصيم / الرياض، المملكة العربية السعودية</span></span>
+        <button onclick="getGPS()" style="background:var(--gold-primary); color:#020e0b; border:none; padding:5px 12px; border-radius:6px; font-size:11px; font-weight:900; cursor:pointer;">موقعي 📡</button>
       </div>
-      <button class="btn-m" onclick="syncFB()">⚡ مزامنة السحابة فوراً</button>
-    </div>
-    <div class="card">
-      <div style="font-weight:800;color:var(--g);margin-bottom:4px;">📚 مراجع الأذكار والتفاسير</div>
-      <p style="font-size:11px;color:var(--m);line-height:1.5;">
-        • مخرجة حصراً من <strong>صحيح البخاري</strong> و<strong>صحيح مسلم</strong>.<br>
-        • التفاسير: <strong>تفسير ابن كثير</strong> و<strong>فوائد ابن حجر (فتح الباري)</strong>.
-      </p>
-    </div>
-  </main>
+      
+      <div class="prayer-hero">
+        <div style="font-size:11px; color:var(--gold-primary); margin-bottom:4px;" id="hijri-txt">تقويم أم القرى</div>
+        <div style="font-size:22px; font-weight:900; margin-bottom:4px;" id="next-p-txt">الصلاة القادمة: الظهر</div>
+        <div style="font-size:12px; color:var(--text-muted);" id="count-txt">جاري الحساب الدقيق...</div>
+      </div>
 
-  <nav class="nav">
-    <div class="nav-btn active" onclick="goTab('athkar',this)"><span>📖</span><span>الأذكار</span></div>
-    <div class="nav-btn" onclick="goTab('prayer',this)"><span>🕌</span><span>المواقيت</span></div>
-    <div class="nav-btn" onclick="goTab('quran',this)"><span>📜</span><span>المصحف</span></div>
-    <div class="nav-btn" onclick="goTab('tasbeeh',this)"><span>📿</span><span>المسبحة</span></div>
-    <div class="nav-btn" onclick="goTab('settings',this)"><span>⚙️</span><span>السحابة</span></div>
-  </nav>
-</div>
+      <div class="prayer-grid">
+        <div class="prayer-card" id="card-Fajr"><span class="prayer-name">الفجر</span><strong class="prayer-time" id="t-Fajr">04:18 ص</strong></div>
+        <div class="prayer-card" id="card-Sunrise"><span class="prayer-name">الشروق</span><strong class="prayer-time" id="t-Sunrise">05:38 ص</strong></div>
+        <div class="prayer-card" id="card-Dhuhr"><span class="prayer-name">الظهر</span><strong class="prayer-time" id="t-Dhuhr">11:58 ص</strong></div>
+        <div class="prayer-card" id="card-Asr"><span class="prayer-name">العصر</span><strong class="prayer-time" id="t-Asr">03:25 م</strong></div>
+        <div class="prayer-card" id="card-Maghrib"><span class="prayer-name">المغرب</span><strong class="prayer-time" id="t-Maghrib">06:19 م</strong></div>
+        <div class="prayer-card" id="card-Isha"><span class="prayer-name">العشاء</span><strong class="prayer-time" id="t-Isha">07:49 م</strong></div>
+      </div>
 
-<div id="q-modal">
-  <div class="hdr">
-    <div style="display:flex;align-items:center;gap:6px;">
-      <button style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;" onclick="closeQ()">✕</button>
-      <h2 style="font-size:13px;font-weight:800;color:var(--g);" id="q-name">سورة الفاتحة</h2>
+      <button class="btn-counter" onclick="askNotif()" style="background:var(--card-hover); color:#fff; border:1px solid var(--border); width:100%;">📲 تفعيل إشعارات الصلوات والأذكار</button>
+    </main>
+
+    <!-- 3. TAB: QURAN (المصحف) -->
+    <main id="tab-quran" class="tab-content">
+      <input type="text" placeholder="🔍 ابحث عن سورة بالاسم أو الرقم..." oninput="searchSurah(this.value)" style="width:100%; padding:10px 14px; background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-sm); margin-bottom:12px; color:#fff; outline:none; font-family:'Tajawal'; font-size:13px;">
+      
+      <div class="dhikr-card" style="padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div>
+          <div style="font-size:10px; color:var(--gold-primary); font-weight:700;">📌 فاصلة القراءة المحفوظة</div>
+          <div style="font-size:14px; font-weight:800;" id="bm-txt">سورة الكهف - آية 1</div>
+        </div>
+        <button onclick="resumeBookmark()" style="background:var(--gold-primary); color:#020e0b; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:900; cursor:pointer;">متابعة</button>
+      </div>
+
+      <div id="surahs-box"></div>
+    </main>
+
+    <!-- 4. TAB: TASBEEH (المسبحة) -->
+    <main id="tab-tasbeeh" class="tab-content">
+      <div class="tasbeeh-container">
+        <div class="tasbeeh-ring" onclick="countTasbeeh()">
+          <div class="tasbeeh-value" id="t-val">0</div>
+          <div class="tasbeeh-target" id="t-target">الهدف: 33</div>
+        </div>
+        <div style="font-size:17px; font-weight:800; color:var(--gold-primary); margin-bottom:12px;" id="t-lbl">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div>
+        
+        <div class="category-scroller" style="justify-content:center;">
+          <button class="chip active" onclick="setTasbeeh('سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', 33, this)">سبحان الله</button>
+          <button class="chip" onclick="setTasbeeh('الْحَمْدُ لِلَّهِ', 33, this)">الحمد لله</button>
+          <button class="chip" onclick="setTasbeeh('لَا إِلَهَ إِلَّا اللَّهُ', 100, this)">لا إله إلا الله</button>
+          <button class="chip" onclick="setTasbeeh('أَسْتَغْفِرُ اللَّهَ', 100, this)">أستغفر الله</button>
+        </div>
+
+        <button class="btn-counter" onclick="resetTasbeeh()" style="background:var(--card-hover); color:#fff; border:1px solid var(--border); width:200px; margin:10px auto;">🔄 تصفير العداد</button>
+      </div>
+    </main>
+
+    <!-- 5. TAB: SETTINGS & CLOUD (السحابة) -->
+    <main id="tab-settings" class="tab-content">
+      <div class="dhikr-card">
+        <div style="font-weight:800; color:var(--gold-primary); margin-bottom:6px; font-size:14px;">☁️ سحابة Firebase Realtime Database</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">مشروع: athkar-72a94 • المزامنة التلقائية للمستخدمين</div>
+        <div style="font-size:12px; background:var(--card-hover); padding:10px; border-radius:var(--radius-sm); margin-bottom:10px;">
+          <div>إجمالي التسبيحات السحابية: <strong id="cloud-cnt" style="color:var(--gold-primary);">0</strong></div>
+          <div style="margin-top:3px;">معرف جهازك: <small id="dev-txt">dev_id</small></div>
+        </div>
+        <button class="btn-counter" onclick="syncFirebase()" style="width:100%;">⚡ مزامنة البيانات السحابية فوراً</button>
+      </div>
+
+      <div class="dhikr-card">
+        <div style="font-weight:800; color:var(--gold-primary); margin-bottom:6px; font-size:14px;">📚 منهجية الأذكار والتفاسير المعتمدة</div>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.7;">
+          • جميع أحاديث وأذكار التطبيق مخرجة حصراً وبالأرقام من <strong>صحيح الإمام البخاري</strong> و<strong>صحيح الإمام مسلم</strong>.<br>
+          • التفاسير المعتمدة: <strong>تفسير الإمام ابن كثير (تفسير القرآن العظيم)</strong> و<strong>شرح صحيح البخاري (فتح الباري للحافظ ابن حجر)</strong>.
+        </p>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <div class="nav-link active" onclick="navigateTab('athkar', this)">
+        <span class="nav-icon">📖</span>
+        <span>الأذكار</span>
+      </div>
+      <div class="nav-link" onclick="navigateTab('prayer', this)">
+        <span class="nav-icon">🕌</span>
+        <span>المواقيت</span>
+      </div>
+      <div class="nav-link" onclick="navigateTab('quran', this)">
+        <span class="nav-icon">📜</span>
+        <span>المصحف</span>
+      </div>
+      <div class="nav-link" onclick="navigateTab('tasbeeh', this)">
+        <span class="nav-icon">📿</span>
+        <span>المسبحة</span>
+      </div>
+      <div class="nav-link" onclick="navigateTab('settings', this)">
+        <span class="nav-icon">⚙️</span>
+        <span>السحابة</span>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Fullscreen Quran Reader Modal -->
+  <div id="quran-reader-modal">
+    <div class="app-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;" onclick="closeQuran()">✕</button>
+        <h2 style="font-size:15px; font-weight:800; color:var(--gold-primary);" id="q-name">سورة الفاتحة</h2>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <button onclick="saveBookmark()" style="background:var(--gold-primary); color:#020e0b; border:none; padding:5px 10px; border-radius:6px; font-size:11px; font-weight:900; cursor:pointer;">🔖 حفظ الفاصلة</button>
+        <button onclick="toggleAudio()" id="aud-btn" style="background:var(--card-hover); color:#fff; border:1px solid var(--border); padding:5px 10px; border-radius:6px; font-size:11px; font-weight:700; cursor:pointer;">▶️ تلاوة</button>
+      </div>
     </div>
-    <div style="display:flex;gap:4px;">
-      <button onclick="saveBM()" style="background:var(--g);color:#031711;border:none;padding:4px 8px;border-radius:4px;font-size:11px;font-weight:900;cursor:pointer;">🔖 حفظ</button>
-      <button onclick="toggleAudio()" id="aud-btn" style="background:var(--c2);color:#fff;border:1px solid var(--b);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;">▶️ تلاوة</button>
+    <div class="quran-ayah-canvas" id="q-content"></div>
+  </div>
+
+  <!-- Tafsir Modal Sheet -->
+  <div class="tafsir-modal-backdrop" id="tafsir-modal">
+    <div class="tafsir-sheet">
+      <div class="tafsir-head">
+        <span id="t-head">تفسير الآية الكريمة</span>
+        <button style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;" onclick="closeTafsir()">✕</button>
+      </div>
+      <div class="tafsir-content">
+        <div style="font-family:'Amiri'; font-size:17px; color:var(--gold-primary); margin-bottom:10px; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:6px;" id="t-ayah"></div>
+        <div style="font-size:12px; font-weight:800; color:var(--gold-primary); margin-bottom:4px;">📖 تفسير الحافظ ابن كثير:</div>
+        <div class="tafsir-box" id="t-kathir"></div>
+        <div style="font-size:12px; font-weight:800; color:var(--success); margin-bottom:4px;">🎓 فوائد ابن حجر (فتح الباري):</div>
+        <div class="tafsir-box" style="border-right-color:var(--success);" id="t-hajar"></div>
+      </div>
     </div>
   </div>
-  <div class="ayah-box" id="q-content"></div>
-</div>
 
-<div class="modal" id="tafsir-modal">
-  <div class="sheet">
-    <div class="sheet-h">
-      <span id="t-head">تفسير الآية</span>
-      <button style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;" onclick="closeTafsir()">✕</button>
-    </div>
-    <div class="sheet-b">
-      <div style="font-family:'Amiri';font-size:16px;color:var(--g);margin-bottom:6px;background:rgba(0,0,0,0.3);padding:6px;border-radius:4px;" id="t-ayah"></div>
-      <div style="font-size:11px;font-weight:800;color:var(--g);margin-bottom:2px;">📖 تفسير ابن كثير:</div>
-      <div class="t-box" id="t-kathir"></div>
-      <div style="font-size:11px;font-weight:800;color:#22c55e;margin-bottom:2px;">🎓 فوائد ابن حجر (فتح الباري):</div>
-      <div class="t-box" style="border-right-color:#22c55e;" id="t-hajar"></div>
-    </div>
-  </div>
-</div>
+  <audio id="player" style="display:none;"></audio>
 
-<audio id="player" style="display:none;"></audio>
-
-<script>
-var athkar = {
-  morning: [
-    { id:"m1", title:"آية الكرسي", text:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ...", count:1, reward:"أُجير من الجن حتى يمسي.", source:"صحيح البخاري (2311)" },
-    { id:"m2", title:"سيد الاستغفار", text:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ...", count:1, reward:"من قالها موقناً بها فمات دخل الجنة.", source:"صحيح البخاري (6306)" },
-    { id:"m3", title:"أصبحنا وأصبح الملك لله", text:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ...", count:1, reward:"سؤال خير اليوم والتعوذ من الشر.", source:"صحيح مسلم (2723)" },
-    { id:"m4", title:"التسبيح مائة مرة", text:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.", count:100, reward:"حُطّت خطاياه وإن كانت مثل زبد البحر.", source:"صحيح البخاري (6405)" },
-    { id:"m5", title:"التهليل مائة مرة", text:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", count:100, reward:"عدل 10 رقاب و100 حسنة وحرز من الشيطان.", source:"صحيح البخاري (3293)" }
-  ],
-  evening: [
-    { id:"e1", title:"أمسينا وأمسى الملك لله", text:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ...", count:1, reward:"سؤال خير الليلة والحفظ من الشر.", source:"صحيح مسلم (2723)" },
-    { id:"e2", title:"سيد الاستغفار مساءً", text:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ...", count:1, reward:"من قالها حين يمسي فمات دخل الجنة.", source:"صحيح البخاري (6306)" },
-    { id:"e3", title:"خواتيم سورة البقرة", text:"آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ...", count:1, reward:"من قرأ بالآيتين في ليلة كفتاه.", source:"صحيح البخاري (5009)" },
-    { id:"e4", title:"الاستعاذة بكلمات الله", text:"أَعُوذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.", count:3, reward:"لم يضره شيء تلك الليلة.", source:"صحيح مسلم (2709)" }
-  ],
-  sleep: [
-    { id:"s1", title:"وضع الجنب للنوم", text:"بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا...", count:1, reward:"حفظ النفس والروح حال النوم.", source:"صحيح البخاري (6320)" },
-    { id:"s2", title:"تسليم النفس لله", text:"اللَّهُمَّ أَسْلَمْتُ وَجْهِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ...", count:1, reward:"فإن مت من ليلتك مت على الفطرة.", source:"صحيح البخاري (247)" },
-    { id:"s3", title:"تسبيح فاطمة عند النوم", text:"سُبْحَانَ اللَّهِ (33 مرة)، الْحَمْدُ لِلَّهِ (33 مرة)، اللَّهُ أَكْبَرُ (34 مرة).", count:1, reward:"خير للعبد من خادم وقوة تعينه.", source:"صحيح البخاري (3705)" }
-  ],
-  general: [
-    { id:"g1", title:"الحوقلة - كنز الجنة", text:"لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.", count:10, reward:"كنز من كنوز الجنة.", source:"صحيح البخاري (4205)" },
-    { id:"g2", title:"الاستغفار والتوبة", text:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.", count:100, reward:"سنة نبوية مؤكدة يومياً.", source:"صحيح البخاري (6307)" },
-    { id:"g3", title:"الصلاة على النبي ﷺ", text:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ...", count:10, reward:"امتثال لأمر الله وعظم أجر الصلاة على النبي ﷺ.", source:"صحيح البخاري (3370)" }
-  ]
-};
-
-var surahNames = "الفاتحة,البقرة,آل عمران,النساء,المائدة,الأنعام,الأعراف,الأنفال,التوبة,يونس,هود,يوسف,الرعد,إبراهيم,الحجر,النحل,الإسراء,الكهف,مريم,طه,الأنبياء,الحج,المؤمنون,النور,الفرقان,الشعراء,النمل,القصص,العنكبوت,الروم,لقمان,السجدة,الأحزاب,سبأ,فاطر,يس,الصافات,ص,الزمر,غافر,فصلت,الشورى,الزخرف,الدخان,الجاثية,الأحقاف,محمد,الفتح,الحجرات,ق,الذاريات,الطور,النجم,القمر,الرحمن,الواقعة,الحديد,المجادلة,الحشر,الممتحنة,الصف,الجمعة,المنافقون,التغابن,الطلاق,التحريم,الملك,القلم,الحاقة,المعارج,نوح,الجن,المزمل,المدثر,القيامة,الإنسان,المرسلات,النبأ,النازعات,عبس,التكوير,الانفطار,المطففين,الانشقاق,البروج,الطارق,الأعلى,الغاشية,الفجر,البلد,الشمس,الليل,الضحى,الشرح,التين,العلق,القدر,البينة,الزلزلة,العاديات,القارعة,التكاثر,العصر,الهمزة,الفيل,قريش,الماعون,الكوثر,الكافرون,النصر,المسد,الإخلاص,الفلق,الناس".split(',');
-
-var fbCfg = { apiKey:"AIzaSyBQ9jCtlstM_Xzuy1_li_AytmXY_9BFZOA", authDomain:"athkar-72a94.firebaseapp.com", databaseURL:"https://athkar-72a94-default-rtdb.firebaseio.com", projectId:"athkar-72a94", storageBucket:"athkar-72a94.firebasestorage.app", messagingSenderId:"1067739053431", appId:"1:1067739053431:web:15a92c10aeea45c056b572" };
-var db = null;
-var devId = localStorage.getItem('dev_id') || ('dev_' + Math.random().toString(36).substring(2, 9));
-localStorage.setItem('dev_id', devId);
-try { if (typeof firebase !== 'undefined') { firebase.initializeApp(fbCfg); db = firebase.database(); } } catch(e) {}
-
-function syncFB() {
-  if (!db) { alert("يعمل التطبيق محلياً."); return; }
-  var t = parseInt(localStorage.getItem('tasbeeh_lifetime') || '0', 10);
-  var b = JSON.parse(localStorage.getItem('q_bm') || '{"surah":18,"name":"سورة الكهف","ayah":1}');
-  db.ref('users/' + devId).update({ tasbeeh: t, bookmark: b, time: new Date().toISOString() })
-    .then(function() { alert("✅ تمت المزامنة مع سحابة Firebase بنجاح!"); });
-}
-
-var curCategory = 'morning';
-var counters = {};
-
-function renderAthkar() {
-  var box = document.getElementById('athkar-box');
-  if (!box) return;
-  var list = athkar[curCategory] || [];
-  box.innerHTML = '';
-  list.forEach(function(item) {
-    var rem = counters[item.id] !== undefined ? counters[item.id] : item.count;
-    var isDone = rem === 0;
-    var div = document.createElement('div');
-    div.className = 'card ' + (isDone ? 'done' : '');
-    div.innerHTML = 
-      '<div class="c-top"><span>۞ ' + item.title + '</span><span>التكرار: ' + item.count + '</span></div>' +
-      '<div class="c-txt">' + item.text + '</div>' +
-      '<div class="c-meta"><div>✨ ' + item.reward + '</div><div>📜 <strong>المرجع:</strong> ' + item.source + '</div></div>';
-
-    var btn = document.createElement('button');
-    btn.className = 'cnt-btn ' + (isDone ? 'done' : '');
-    btn.innerHTML = '<span>' + (isDone ? '✓ تم بحمد الله' : 'اضغط للتسبيح') + '</span><span class="badge">' + rem + '</span>';
-    btn.onclick = function() { decCounter(item.id, item.count); };
-
-    div.appendChild(btn);
-    box.appendChild(div);
-  });
-}
-
-function decCounter(id, max) {
-  if (counters[id] === undefined) counters[id] = max;
-  if (counters[id] > 0) {
-    counters[id]--;
-    if (navigator.vibrate) navigator.vibrate(35);
-    addLifetime();
-  }
-  localStorage.setItem('cnts', JSON.stringify(counters));
-  renderAthkar();
-}
-
-function setCat(cat, el) {
-  curCategory = cat;
-  document.querySelectorAll('#tab-athkar .chip').forEach(function(c) { c.classList.remove('active'); });
-  if (el) el.classList.add('active');
-  renderAthkar();
-}
-
-var coords = { lat: 26.25, lng: 43.83 };
-function getGPS() {
-  if ("geolocation" in navigator) {
-    document.getElementById('loc-txt').innerText = "جاري التحديد عبر GPS...";
-    navigator.geolocation.getCurrentPosition(function(pos) {
-      coords.lat = pos.coords.latitude; coords.lng = pos.coords.longitude;
-      document.getElementById('loc-txt').innerText = "موقعك (" + coords.lat.toFixed(2) + "°, " + coords.lng.toFixed(2) + "°)";
-      loadPrayerTimes();
-    }, function() { loadPrayerTimes(); }, { timeout: 8000 });
-  }
-}
-
-function loadPrayerTimes() {
-  var ts = Math.floor(Date.now() / 1000);
-  fetch("https://api.aladhan.com/v1/timings/" + ts + "?latitude=" + coords.lat + "&longitude=" + coords.lng + "&method=4")
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d && d.data) {
-        document.getElementById('hijri-txt').innerText = d.data.date.hijri.day + " " + d.data.date.hijri.month.ar + " " + d.data.date.hijri.year + " هـ";
-        setTimesUI(d.data.timings);
-      }
-    }).catch(function() {
-      setTimesUI({ Fajr: "04:18", Sunrise: "05:38", Dhuhr: "11:58", Asr: "15:25", Maghrib: "18:19", Isha: "19:49" });
-    });
-}
-
-function setTimesUI(t) {
-  ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'].forEach(function(p) {
-    var el = document.getElementById('t-' + p);
-    if (el && t[p]) el.innerText = fmtT(t[p]);
-  });
-  calcNextP(t);
-}
-
-function fmtT(s) {
-  var p = s.split(':'), h = parseInt(p[0], 10), m = p[1], pm = h >= 12;
-  if (h > 12) h -= 12; if (h === 0) h = 12;
-  return h + ":" + m + (pm ? " م" : " ص");
-}
-
-function calcNextP(t) {
-  var now = new Date(), names = { Fajr:"الفجر", Sunrise:"الشروق", Dhuhr:"الظهر", Asr:"العصر", Maghrib:"المغرب", Isha:"العشاء" };
-  var keys = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'], next = 'Fajr', min = Infinity;
-  keys.forEach(function(k) {
-    var p = t[k].split(':'), d = new Date();
-    d.setHours(parseInt(p[0],10), parseInt(p[1],10), 0);
-    var diff = d.getTime() - now.getTime();
-    if (diff > 0 && diff < min) { min = diff; next = k; }
-  });
-  document.querySelectorAll('.p-card').forEach(function(c) { c.classList.remove('cur'); });
-  var card = document.getElementById('card-' + next);
-  if (card) card.classList.add('cur');
-  document.getElementById('next-p-txt').innerText = "الصلاة القادمة: صلاة " + names[next];
-}
-
-function askNotif() {
-  if ("Notification" in window) {
-    Notification.requestPermission().then(function(p) { alert(p === "granted" ? "✅ تم تفعيل الإشعارات بنجاح!" : "يرجى تفعيل الإشعارات من إعدادات المتصفح."); });
-  }
-}
-
-var curSurah = 1, isAud = false;
-function renderSurahsList(filterTxt) {
-  var box = document.getElementById('surahs-box');
-  if (!box) return;
-  box.innerHTML = '';
-  surahNames.forEach(function(name, idx) {
-    var n = idx + 1;
-    if (filterTxt && name.indexOf(filterTxt) === -1 && n.toString() !== filterTxt) return;
-    var div = document.createElement('div');
-    div.className = 's-item';
-    div.onclick = function() { openQ(n); };
-    div.innerHTML = '<div style="width:26px;height:26px;background:var(--c2);border:1px solid var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--g);">' + n + '</div><div style="flex:1;margin-right:8px;font-weight:800;color:#fff;font-size:13px;">سورة ' + name + '</div><div style="color:var(--g);">📖</div>';
-    box.appendChild(div);
-  });
-}
-
-function searchSurah(q) { renderSurahsList((q || '').trim()); }
-
-function openQ(n) {
-  curSurah = n;
-  var name = surahNames[n - 1];
-  document.getElementById('q-name').innerText = "سورة " + name;
-  document.getElementById('q-modal').classList.add('active');
-  var body = document.getElementById('q-content');
-  body.innerHTML = '<div style="text-align:center;padding:16px;color:var(--m);">جاري جلب الآيات...</div>';
-
-  fetch("https://api.alquran.cloud/v1/surah/" + n)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d && d.data && d.data.ayahs) {
-        body.innerHTML = '';
-        if (n !== 9 && n !== 1) {
-          var bis = document.createElement('div');
-          bis.style.cssText = 'text-align:center;color:var(--g);margin-bottom:10px;font-size:20px;';
-          bis.innerText = 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ';
-          body.appendChild(bis);
-        }
-        d.data.ayahs.forEach(function(ay) {
-          var txt = ay.text;
-          if (ay.numberInSurah === 1 && txt.startsWith("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ") && n !== 1) {
-            txt = txt.replace("بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "").trim();
-          }
-          var span = document.createElement('span');
-          span.className = 'ayah-span';
-          span.innerText = txt + ' ';
-          var numSpan = document.createElement('span');
-          numSpan.className = 'ayah-num';
-          numSpan.innerText = ay.numberInSurah;
-          span.appendChild(numSpan);
-          span.onclick = function() { showTafsir(n, ay.numberInSurah, txt); };
-          body.appendChild(span);
-          body.appendChild(document.createTextNode(' '));
-        });
-      }
-    }).catch(function() {
-      body.innerHTML = '<div style="text-align:center;padding:16px;color:var(--m);">يتطلب تصفح السور اتصالاً بالإنترنت.</div>';
-    });
-}
-
-function closeQ() { document.getElementById('q-modal').classList.remove('active'); var a = document.getElementById('player'); a.pause(); isAud = false; document.getElementById('aud-btn').innerText = "▶️ تلاوة"; }
-
-function toggleAudio() {
-  var a = document.getElementById('player'), b = document.getElementById('aud-btn');
-  if (isAud) { a.pause(); isAud = false; b.innerText = "▶️ تلاوة"; }
-  else {
-    a.src = "https://server8.mp3quran.net/afs/" + ("000" + curSurah).slice(-3) + ".mp3";
-    a.play().then(function() { isAud = true; b.innerText = "⏸️ إيقاف"; }).catch(function() { alert("يتطلب الاستماع اتصالاً بالإنترنت."); });
-  }
-}
-
-function saveBM() {
-  var name = surahNames[curSurah - 1];
-  var b = { surah: curSurah, name: "سورة " + name, ayah: 1 };
-  localStorage.setItem('q_bm', JSON.stringify(b));
-  document.getElementById('bm-txt').innerText = b.name + " - آية " + b.ayah;
-  if (db) db.ref('users/' + devId + '/bookmark').set(b);
-  alert("✅ تم حفظ الفاصلة!");
-}
-
-function resumeBM() {
-  var b = JSON.parse(localStorage.getItem('q_bm') || '{"surah":18}');
-  openQ(b.surah || 18);
-}
-
-function showTafsir(surahN, ayahN, txt) {
-  var name = surahNames[surahN - 1];
-  document.getElementById('t-head').innerText = "تفسير سورة " + name + " (" + ayahN + ")";
-  document.getElementById('t-ayah').innerText = txt;
-  var k = document.getElementById('t-kathir'), h = document.getElementById('t-hajar');
-  if (surahN === 1) {
-    k.innerHTML = "<strong>قال ابن كثير:</strong> الفاتحة أم الكتاب، اشتملت على توحيد الله وعبادته وسؤال الهداية إلى الصراط المستقيم.";
-    h.innerHTML = "<strong>قال ابن حجر في فتح الباري:</strong> دلت الأحاديث في الصحيحين على فضل الفاتحة، وفيها إثبات الاستعانة بالله وحده.";
-  } else {
-    k.innerHTML = "<strong>تفسير ابن كثير:</strong> بيان معاني ألفاظ الآية وتفسير القرآن بالقرآن والسنة النبوية الصحيحة وأقوال السلف الصالح.";
-    h.innerHTML = "<strong>فوائد ابن حجر (فتح الباري):</strong> استنباط الأحكام الحديثية والفقهية واللغوية وشرح الأحاديث الواردة.";
-  }
-  document.getElementById('tafsir-modal').classList.add('active');
-}
-
-function closeTafsir() { document.getElementById('tafsir-modal').classList.remove('active'); }
-
-var tCount = 0, tTarget = 33;
-function countT() {
-  tCount++;
-  document.getElementById('t-val').innerText = tCount;
-  if (navigator.vibrate) navigator.vibrate(35);
-  addLifetime();
-}
-function addLifetime() {
-  var c = parseInt(localStorage.getItem('tasbeeh_lifetime') || '0', 10) + 1;
-  localStorage.setItem('tasbeeh_lifetime', c);
-  var el = document.getElementById('cloud-cnt');
-  if (el) el.innerText = c;
-}
-function setT(lbl, tgt, el) {
-  document.getElementById('t-lbl').innerText = lbl;
-  tTarget = tgt;
-  document.getElementById('t-target').innerText = "الهدف: " + tgt;
-  tCount = 0;
-  document.getElementById('t-val').innerText = "0";
-  document.querySelectorAll('#tab-tasbeeh .chip').forEach(function(c) { c.classList.remove('active'); });
-  if (el) el.classList.add('active');
-}
-function resetT() { tCount = 0; document.getElementById('t-val').innerText = "0"; }
-
-function goTab(id, el) {
-  document.querySelectorAll('.sec').forEach(function(s) { s.classList.remove('active'); });
-  document.querySelectorAll('.nav-btn').forEach(function(n) { n.classList.remove('active'); });
-  var target = document.getElementById('tab-' + id);
-  if (target) target.classList.add('active');
-  if (el) el.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-window.addEventListener('DOMContentLoaded', function() {
-  try { counters = JSON.parse(localStorage.getItem('cnts') || '{}'); } catch(e) {}
-  renderAthkar();
-  renderSurahsList('');
-  loadPrayerTimes();
-
-  var b = JSON.parse(localStorage.getItem('q_bm') || '{"name":"سورة الكهف","ayah":1}');
-  document.getElementById('bm-txt').innerText = b.name + " - آية " + b.ayah;
-  document.getElementById('cloud-cnt').innerText = localStorage.getItem('tasbeeh_lifetime') || '0';
-  document.getElementById('dev-txt').innerText = devId;
-});
-</script>
+  <!-- Modular Script -->
+  <script src="js/app.js"></script>
 </body>
 </html>
