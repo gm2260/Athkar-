@@ -12,12 +12,12 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
-  <!-- Modular Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="app">
-    <!-- Top Application Bar -->
+    <!-- Header -->
     <header class="app-header">
       <div class="brand">
         <span class="brand-icon">☪</span>
@@ -29,7 +29,7 @@
       </div>
     </header>
 
-    <!-- 1. TAB: ATHKAR (الأذكار) -->
+    <!-- 1. TAB: ATHKAR -->
     <main id="tab-athkar" class="tab-content active">
       <div class="category-scroller">
         <button class="chip active" onclick="setCategory('morning', this)">☀️ أذكار الصباح</button>
@@ -40,7 +40,7 @@
       <div id="athkar-box"></div>
     </main>
 
-    <!-- 2. TAB: PRAYER (المواقيت) -->
+    <!-- 2. TAB: PRAYER -->
     <main id="tab-prayer" class="tab-content">
       <div class="dhikr-card" style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; margin-bottom:12px;">
         <span style="font-size:12px; color:var(--gold-primary); font-weight:800;">📍 <span id="loc-txt">القصيم / الرياض، المملكة العربية السعودية</span></span>
@@ -65,7 +65,7 @@
       <button class="btn-counter" onclick="askNotif()" style="background:var(--card-hover); color:#fff; border:1px solid var(--border); width:100%;">📲 تفعيل إشعارات الصلوات والأذكار</button>
     </main>
 
-    <!-- 3. TAB: QURAN (المصحف) -->
+    <!-- 3. TAB: QURAN -->
     <main id="tab-quran" class="tab-content">
       <input type="text" placeholder="🔍 ابحث عن سورة بالاسم أو الرقم..." oninput="searchSurah(this.value)" style="width:100%; padding:10px 14px; background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-sm); margin-bottom:12px; color:#fff; outline:none; font-family:'Tajawal'; font-size:13px;">
       
@@ -80,7 +80,7 @@
       <div id="surahs-box"></div>
     </main>
 
-    <!-- 4. TAB: TASBEEH (المسبحة) -->
+    <!-- 4. TAB: TASBEEH -->
     <main id="tab-tasbeeh" class="tab-content">
       <div class="tasbeeh-container">
         <div class="tasbeeh-ring" onclick="countTasbeeh()">
@@ -100,7 +100,7 @@
       </div>
     </main>
 
-    <!-- 5. TAB: SETTINGS & CLOUD (السحابة) -->
+    <!-- 5. TAB: SETTINGS -->
     <main id="tab-settings" class="tab-content">
       <div class="dhikr-card">
         <div style="font-weight:800; color:var(--gold-primary); margin-bottom:6px; font-size:14px;">☁️ سحابة Firebase Realtime Database</div>
@@ -116,12 +116,12 @@
         <div style="font-weight:800; color:var(--gold-primary); margin-bottom:6px; font-size:14px;">📚 منهجية الأذكار والتفاسير المعتمدة</div>
         <p style="font-size:12px; color:var(--text-muted); line-height:1.7;">
           • جميع أحاديث وأذكار التطبيق مخرجة حصراً وبالأرقام من <strong>صحيح الإمام البخاري</strong> و<strong>صحيح الإمام مسلم</strong>.<br>
-          • التفاسير المعتمدة: <strong>تفسير الإمام ابن كثير (تفسير القرآن العظيم)</strong> و<strong>شرح صحيح البخاري (فتح الباري للحافظ ابن حجر)</strong>.
+          • التفاسير المعتمدة: <strong>تفسير الإمام ابن كثير</strong> و<strong>شرح صحيح البخاري (فتح الباري للحافظ ابن حجر)</strong>.
         </p>
       </div>
     </main>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="bottom-nav">
       <div class="nav-link active" onclick="navigateTab('athkar', this)">
         <span class="nav-icon">📖</span>
@@ -146,7 +146,7 @@
     </nav>
   </div>
 
-  <!-- Fullscreen Quran Reader Modal -->
+  <!-- Quran Reader Modal -->
   <div id="quran-reader-modal">
     <div class="app-header">
       <div style="display:flex; align-items:center; gap:8px;">
@@ -180,7 +180,7 @@
 
   <audio id="player" style="display:none;"></audio>
 
-  <!-- Modular Script -->
-  <script src="js/app.js"></script>
+  <!-- Script -->
+  <script src="app.js"></script>
 </body>
 </html>
